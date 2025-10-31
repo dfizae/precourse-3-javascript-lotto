@@ -1,11 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
+import WinningNumberView from './view/WinningNumberView.js';
 
 class App {
   async run() {
     try{
-      const purchase = await new InputView().inputPurchase();
-      Console.print(purchase);
+      const amount = await InputView.readPurchaseAmount();
+      const winningNumbers = await WinningNumberView.readWinningNumbers();
     } catch (error) {
       Console.print(error.message);
     }
