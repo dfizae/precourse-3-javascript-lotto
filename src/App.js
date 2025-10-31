@@ -7,6 +7,7 @@ class App {
     try{
       const amount = await InputView.readPurchaseAmount();
       const winningNumbers = await WinningNumberView.readWinningNumbers();
+      const bonusNumber = await WinningNumberView.readBonusNumber(winningNumbers);
     } catch (error) {
       Console.print(error.message);
     }
