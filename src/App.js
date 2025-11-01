@@ -6,6 +6,7 @@ import WinningNumberView from './view/WinningNumberView.js';
 import BonusNumberView from './view/BonusNumberView.js';
 import { ERROR } from './constants/Error.js';
 import Lotto from './Lotto.js';
+import { LottoGame } from './LottoGame.js';
 
 class App {
   async run() {
