@@ -12,6 +12,10 @@ export default {
       throw new Error(ERROR.INVALID_PURCHASE_AMOUNT);
     }
 
+    const count = (amount / 1000);
+    if(count > 10){
+      throw new Error(ERROR.INVALID_PURCHASE_AMOUNT_COUNT);
+    }
     return amount;
   }
 };
