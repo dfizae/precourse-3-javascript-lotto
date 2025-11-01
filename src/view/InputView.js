@@ -1,4 +1,3 @@
-// src/view/InputView.js
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from '../constants/Messages.js';
 import { ERROR } from '../constants/Error.js';
@@ -12,8 +11,7 @@ export default {
       throw new Error(ERROR.INVALID_PURCHASE_AMOUNT);
     }
 
-    const count = (amount / 1000);
-    if(count > 10){
+    if((amount / 1000) > 10){
       throw new Error(ERROR.INVALID_PURCHASE_AMOUNT_COUNT);
     }
     return amount;

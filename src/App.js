@@ -1,6 +1,7 @@
 // src/App.js
 import { Console, Random } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
+import OutputView from './view/OutputView.js';
 import WinningNumberView from './view/WinningNumberView.js';
 import BonusNumberView from './view/BonusNumberView.js';
 import { ERROR } from './constants/Error.js';
@@ -16,8 +17,8 @@ class App {
       const lottos = this.#generateLottos(amount);
 
       // 출력
-      Console.print(`\n${lottos.length}개를 구매했습니다.`);
-      lottos.forEach(lotto => Console.print(`[${lotto.getNumbers().join(', ')}]`));
+      OutputView.printPurchaseCount(lottos.length);
+      OutputView.printLottos(lottos);
 
       // 당첨 번호 입력
       const winningNumbers = await WinningNumberView.readWinningNumbers();
@@ -27,12 +28,9 @@ class App {
 
       // 로또 검증
       const winningLotto = new Lotto(winningNumbers);
-
       if (winningLotto.getNumbers().includes(bonusNumber)) {
         throw new Error(ERROR.BONUS_NUMBER_DUPLICATED);
       }
-
-      // 로또 계산
       
     } catch (error) {
       Console.print(error.message);

@@ -1,4 +1,3 @@
-// src/view/WinningNumberView.js
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from '../constants/Messages.js';
 import { ERROR } from '../constants/Error.js';
