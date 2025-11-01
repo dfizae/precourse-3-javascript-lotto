@@ -32,6 +32,17 @@ class App {
         throw new Error(ERROR.BONUS_NUMBER_DUPLICATED);
       }
       
+      const stats = LottoGame.calculateStatistics(
+        lottos,
+        winningNumbers,
+        bonusNumber
+      );
+      
+      const profitRate = LottoGame.calculateProfitRate(stats, amount);
+
+      OutputView.printResults(stats);
+      OutputView.printProfitRate(profitRate);
+
     } catch (error) {
       Console.print(error.message);
     }
