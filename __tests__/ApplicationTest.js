@@ -91,8 +91,8 @@ describe("로또 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
-
-// 1. 위에 있는 예외 테스트 확장 (구매 금액 관련)
+  
+// 1. 예외 테스트 확장 (구매 금액 관련)
   test.each([
     ['구매 금액이 1000 단위가 아닐 때', '1500'],
     ['구매 금액이 숫자가 아닐 때', '1000j'],
