@@ -1,6 +1,6 @@
 import { RANK, PRIZE_MONEY } from "../constants/Game.js";
 
-export const LottoGame = {
+export const LottoCalculator = {
   calculateStatistics(lottos, winningNumbers, bonusNumber) {
     const stats = {
       [RANK.FIRST]: 0,

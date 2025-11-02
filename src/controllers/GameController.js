@@ -1,8 +1,7 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import { LottoGame } from '../services/LottoCalculator.js';
-import { ERROR } from '../constants/Error.js';
+import { LottoCalculator } from '../services/LottoCalculator.js';
 import Lotto from '../models/Lotto.js';
 
 class GameController {
@@ -24,35 +23,33 @@ class GameController {
     this.#purchaseAmount = await InputView.readPurchaseAmount();
     const count = this.#purchaseAmount / 1000;
     
+    // 로또 6자리 출력
     this.#lottos = this.#generateLottos(count);
 
     OutputView.printPurchaseCount(this.#lottos.length);
     OutputView.printLottos(this.#lottos);
   }
 
-  // 2. 당첨 번호 및 보너스 번호 입력 및 검증   
+  // 2. 당첨 번호 및 보너스 번호 입력
   async #setupWinningNumbers() {
     const winningNumbers = await InputView.readWinningNumbers();
-    new Lotto(winningNumbers); // 당첨 번호 유효성 검사
 
-    const bonusNumber = await InputView.readBonusNumber();
-    if (winningNumbers.includes(bonusNumber)) {
-      throw new Error(ERROR.BONUS_NUMBER_DUPLICATED);
-    }
+    const bonusNumber = await InputView.readBonusNumber(winningNumbers);
     
     return { winningNumbers, bonusNumber };
   }
 
-  // 3. 당첨 통계 및 수익률 계산 및 출력
+  // 3. 당첨 통계 및 수익률 계산 및 출력 (LottoCalculator.js 이용)
   #calculateAndPrintResults(winningNumbers, bonusNumber) {
-    const stats = LottoGame.calculateStatistics(
+    const stats = LottoCalculator.calculateStatistics(
       this.#lottos,
       winningNumbers,
       bonusNumber
     );
     
-    const profitRate = LottoGame.calculateProfitRate(stats, this.#purchaseAmount);
+    const profitRate = LottoCalculator.calculateProfitRate(stats, this.#purchaseAmount);
 
+    // 결과와 수익률 출력 
     OutputView.printResults(stats);
     OutputView.printProfitRate(profitRate);
   }

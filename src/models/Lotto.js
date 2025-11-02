@@ -40,6 +40,7 @@ class Lotto {
     return this.#numbers;
   }
 
+  // 4. 로또 번호와 당첨 번호, 보너스 번호 일치 여부 검증
   calculateRank(winningNumbers, bonusNumber) {
     const matchCount = this.#numbers
       .filter(num => winningNumbers.includes(num))
