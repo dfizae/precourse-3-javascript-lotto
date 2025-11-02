@@ -1,4 +1,3 @@
-// src/App.js
 import { Console, Random } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';

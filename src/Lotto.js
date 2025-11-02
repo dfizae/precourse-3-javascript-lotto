@@ -17,7 +17,7 @@ class Lotto {
 
     const hasDuplicates = new Set(numbers).size !== numbers.length;
     if (hasDuplicates) {
-      throw new Error(ERROR.DUPLICATED_NUMBER);
+      throw new Error(ERROR.BONUS_NUMBER_DUPLICATED);
     }
 
     const outOfRange = numbers.some(num => num < 1 || num > 45);
