@@ -30,8 +30,8 @@
 프로젝트의 핵심 목표는 **관심사의 분리(SoC)**였습니다. 
 각 파일과 폴더가 단 하나의 책임(SRP)만 갖도록 구조를 설계했습니다.
 
-
-precourse-2-javascript-carRacing/
+```
+precourse-3-javascript-Lotto/
 ├── tests/
 │   └── ApplicationTest.js : 기존 테스트 코드 관리
 │   └── LottoTest.js : Lotto.js 파일 테스트 코드 관리
@@ -67,6 +67,7 @@ precourse-2-javascript-carRacing/
 ├── package-lock.json
 ├── package.json
 └── README.md 
+```
 
 <br>
 
