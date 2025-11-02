@@ -1,11 +1,9 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import InputView from './view/InputView.js';
-import WinningNumberView from './view/WinningNumberView.js';
-import BonusNumberView from './view/BonusNumberView.js';
-import OutputView from './view/OutputView.js';
-import { LottoGame } from './LottoGame.js';
-import { ERROR } from './constants/Error.js';
-import Lotto from './Lotto.js';
+import InputView from '../view/InputView.js';
+import OutputView from '../view/OutputView.js';
+import { LottoGame } from '../services/LottoCalculator.js';
+import { ERROR } from '../constants/Error.js';
+import Lotto from '../models/Lotto.js';
 
 class GameController {
   #lottos = [];
@@ -34,10 +32,10 @@ class GameController {
 
   // 2. 당첨 번호 및 보너스 번호 입력 및 검증   
   async #setupWinningNumbers() {
-    const winningNumbers = await WinningNumberView.readWinningNumbers();
+    const winningNumbers = await InputView.readWinningNumbers();
     new Lotto(winningNumbers); // 당첨 번호 유효성 검사
 
-    const bonusNumber = await BonusNumberView.readBonusNumber();
+    const bonusNumber = await InputView.readBonusNumber();
     if (winningNumbers.includes(bonusNumber)) {
       throw new Error(ERROR.BONUS_NUMBER_DUPLICATED);
     }

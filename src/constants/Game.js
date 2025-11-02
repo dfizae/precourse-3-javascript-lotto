@@ -1,4 +1,3 @@
-// constants/Game.js
 export const RANK = {
   FIRST: 1,
   SECOND: 2,

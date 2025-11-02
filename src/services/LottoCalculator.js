@@ -1,4 +1,4 @@
-import { PRIZE_MONEY, RANK } from './constants/Game.js';
+import { RANK, PRIZE_MONEY } from "../constants/Game.js";
 
 export const LottoGame = {
   calculateStatistics(lottos, winningNumbers, bonusNumber) {

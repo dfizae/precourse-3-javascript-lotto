@@ -1,6 +1,5 @@
-// src/models/Lotto.js
-import { ERROR } from './constants/Error.js';
-import { RANK } from './constants/Game.js';
+import { ERROR } from "../constants/Error.js";
+import { RANK } from "../constants/Game.js";
 
 class Lotto {
   #numbers;
