@@ -59,7 +59,7 @@ describe("로또 클래스 테스트", () => {
   });
 });
 
-// Lotto.js의 calculateRank 메서드 기능 테스트
+// Lotto.js의 calculateRank 메서드 기능 테스트 (로또 )
 describe("등수 계산(calculateRank) 테스트", () => {
   const winningNumbers = [1, 2, 3, 4, 5, 6];
   const bonusNumber = 7;

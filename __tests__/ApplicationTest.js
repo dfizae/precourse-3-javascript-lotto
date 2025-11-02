@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { ERROR } from "../src/constants/Error.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -95,3 +96,68 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 });
+
+describe('입력 예외 테스트', () => {
+    
+    // 1. 위에 있는 예외 테스트 확장 (구매 금액 관련)
+    test.each([
+      ['구매 금액이 1000 단위가 아닐 때', '1500'],
+      ['구매 금액이 숫자가 아닐 때', '1000j'],
+      ['구매 금액이 10개 초과일 때', '11000'],
+      ['구매 금액이 0원일 때', '0'],
+    ])('예외 테스트: %s', async (name, input) => {
+      await runException(input);
+    });
+
+    // 2. 입력한 당첨 번호 예외 테스트
+    test.each([
+      ['6개가 아닐 때 (부족)', '1,2,3', ERROR.INVALID_WINNING_NUMBER_COUNT],
+      ['6개가 아닐 때 (초과)', '1,2,3,4,5,6,7', ERROR.INVALID_WINNING_NUMBER_COUNT],
+      ['숫자가 아닐 때', '1,2,3,4,5,a', ERROR.INVALID_WINNING_NUMBER],
+      ['범위를 벗어날 때 (0)', '0,1,2,3,4,5', ERROR.INVALID_WINNING_NUMBER], // 'Lotto.js'가 아닌 'Validation.js'의 에러 확인
+      ['범위를 벗어날 때 (46)', '1,2,3,4,5,46', ERROR.INVALID_WINNING_NUMBER], // 'Lotto.js'가 아닌 'Validation.js'의 에러 확인
+      ['자체 중복일 때', '1,2,3,4,5,5', ERROR.WINNING_NUMBER_DUPLICATED],
+    ])('예외 테스트: 당첨 번호가 %s', async (name, failedInput, expectedError) => {
+      // given
+      const logSpy = getLogSpy();
+      mockRandoms([[1, 2, 3, 4, 5, 6]]);
+      mockQuestions([
+        '1000',          // 1. 구매 (성공)₩
+        failedInput,     // 2. 당첨 (실패)
+        '1,2,3,4,5,6',   // 3. 당첨 (재시도-성공)
+        '7',             // 4. 보너스 (성공)
+      ]);
+
+      // when
+      const app = new App();
+      await app.run();
+
+      // then
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(expectedError));
+    });
+
+    // 3. 보너스 번호 예외 테스트
+    test.each([
+      ['숫자가 아닐 때', 'a', ERROR.INVALID_BONUS_NUMBER],
+      ['범위를 벗어날 때 (0)', '0', ERROR.INVALID_BONUS_NUMBER],
+      ['범위를 벗어날 때 (46)', '46', ERROR.INVALID_BONUS_NUMBER],
+      ['당첨 번호와 중복될 때', '6', ERROR.BONUS_NUMBER_DUPLICATED],
+    ])('예외 테스트: 보너스 번호가 %s', async (name, failedInput, expectedError) => {
+      // given
+      const logSpy = getLogSpy();
+      mockRandoms([[1, 2, 3, 4, 5, 6]]);
+      mockQuestions([
+        '1000',          // 1. 구매 (성공)
+        '1,2,3,4,5,6',   // 2. 당첨 (성공)
+        failedInput,     // 3. 보너스 (실패)
+        '7',             // 4. 보너스 (재시도-성공)
+      ]);
+
+      // when
+      const app = new App();
+      await app.run();
+
+      // then
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(expectedError));
+    });
+  });
