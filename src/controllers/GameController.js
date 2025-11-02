@@ -19,7 +19,7 @@ class GameController {
     }
   }
 
-  // 1. 로또 구매 및 발매
+  // 1. 로또 구매 및 발매 그리고 구매한 로또의 6자리 번호 출력
   async #setupLottos() {
     this.#purchaseAmount = await InputView.readPurchaseAmount();
     const count = this.#purchaseAmount / 1000;

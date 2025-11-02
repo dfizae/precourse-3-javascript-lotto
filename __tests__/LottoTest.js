@@ -7,6 +7,12 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
+  test("로또 번호의 개수가 6개 미만이면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5]);
+    }).toThrow("[ERROR]");
+  });
+
   // TODO: 테스트가 통과하도록 프로덕션 코드 구현
   test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
     expect(() => {
@@ -27,15 +33,34 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
+  test("로또 번호에 정수가 아닌 숫자가 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1.5, 2, 3, 4, 5, 6]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("로또 번호에 문자가 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 'a']);
+    }).toThrow("[ERROR]");
+  });
+
+  test("로또 번호에 특수문자가 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, ':']);
+    }).toThrow("[ERROR]");
+  });
+
   // 정상적인 출력 시
   test("정상적인 로또 번호는 예외를 발생시키지 않는다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6]);
     }).not.toThrow();
   });
+});
 
-  // Lotto.js의 calculateRank 메서드 기능 테스트
-  describe("등수 계산(calculateRank) 테스트", () => {
+// Lotto.js의 calculateRank 메서드 기능 테스트
+describe("등수 계산(calculateRank) 테스트", () => {
   const winningNumbers = [1, 2, 3, 4, 5, 6];
   const bonusNumber = 7;
 
@@ -52,5 +77,4 @@ describe("로또 클래스 테스트", () => {
     // RANK 상수를 임포트해서 비교
     expect(lotto.calculateRank(winningNumbers, bonusNumber)).toBe(expectedRank);
   });
-});
 });
