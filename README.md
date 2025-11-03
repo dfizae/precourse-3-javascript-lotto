@@ -3,6 +3,9 @@
 ## 📌 프로젝트 기능
 간딴한 로또 발매기를 구현한다.
 
+### 3주차 회고록
+https://velog.io/@dfizae/%EC%9A%B0%ED%85%8C%EC%BD%94-%ED%94%84%EB%A6%AC%EC%BD%94%EC%8A%A4-3%EC%A3%BC%EC%B0%A8-%ED%9A%8C%EA%B3%A0%EB%A1%9D
+
 ## 📌 주요 기능
 
 ### 1. 로또 구매
@@ -76,15 +79,14 @@ precourse-3-javascript-Lotto/
 
 주어진 요구사항을 만족시키기 위해 다음과 같은 전략을 사용했습니다.
 
-### 1. Indent 2 / 함수 15라인 제한 준수
+### 1. Indent 2 / 함수 15라인 제한 준수 / 재입력 로직과의 조화
 `while` 대신 try...catch + 재귀 호출로 재입력 로직을 간결하게 구현했습니다.
 
 ### 2. `Validation.js` vs `Lotto.js` : 검증 로직의 분리
 |구분|임무|예시|
 |:---|:---|:---|
 |`utils/Validation.js`|사용자 입력값 검증 (문자열 → 숫자 배열 변환)|'1,2,a', ' 1, 2' 등 입력 처리|
-|`models/Lotto.js`|로또 규칙 검증 (1~45 범위, 중복, 개수)|
-Random.pickUniqueNumbersInRange() 결과 검증|
+|`models/Lotto.js`|로또 규칙 검증 (1~45 범위, 중복, 개수)|`Random.pickUniqueNumbersInRange()` 결과 검증|
 
 ### 3. MVC 패턴을 응용한 흐름 제어와 Service 분리 시도
 MVC 기반 구조로 역할을 명확히 나누었습니다.
@@ -98,7 +100,7 @@ MVC 기반 구조로 역할을 명확히 나누었습니다.
 
 - **Service**: `LottoCalculator.js` — 등수 계산, 수익률 연산
 
-Util: `Validation.js` — 입력값 정제
+- **Util**: `Validation.js` — 사용자의 입력값 유효성 검사
 
 ### 4. 상수화를 통한 매직 넘버 및 문자열 제거 (하드 코딩 방지)
 
