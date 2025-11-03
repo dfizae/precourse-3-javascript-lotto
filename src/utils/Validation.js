@@ -1,6 +1,8 @@
 import { ERROR } from '../constants/Error.js';
 
 export const Validation = {
+
+  // 1. 구매한 로또 수량 입력 시 유효성 검사
   validatePurchaseAmount(input) {
     const amount = Number(input.trim());
     if (Number.isNaN(amount) || amount % 1000 !== 0 || amount <= 0) {
@@ -12,6 +14,7 @@ export const Validation = {
     return amount;
   },
 
+  // 2. 입력한 당첨 번호 유효성 검사
   validateWinningNumbers(input) {
     const numbers = input.split(',').map(num => num.trim()).filter(num => num !== '').map(Number);
     if (numbers.some(num => Number.isNaN(num) || !Number.isInteger(num) || num < 1 || num > 45)) {
@@ -26,6 +29,7 @@ export const Validation = {
     return numbers;
   },
   
+  // 3. 입력한 보너스 번호 유효성 검사
   validateBonusNumber(input, winningNumbers) {
     const number = Number(input.trim());
     if (Number.isNaN(number) || !Number.isInteger(number) || number < 1 || number > 45) {

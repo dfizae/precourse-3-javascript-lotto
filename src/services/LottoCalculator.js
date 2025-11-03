@@ -1,6 +1,8 @@
 import { RANK, PRIZE_MONEY } from "../constants/Game.js";
 
 export const LottoCalculator = {
+
+  // 1. 당첨 계산
   calculateStatistics(lottos, winningNumbers, bonusNumber) {
     const stats = {
       [RANK.FIRST]: 0,
@@ -19,6 +21,7 @@ export const LottoCalculator = {
     return stats;
   },
 
+  // 2. 수익률 계산
   calculateProfitRate(stats, purchaseAmount) {
     let totalPrize = 0;
 
