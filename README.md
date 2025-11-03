@@ -4,7 +4,7 @@
 간딴한 로또 발매기를 구현한다.
 
 ### 3주차 회고록
-https://velog.io/@dfizae/%EC%9A%B0%ED%85%8C%EC%BD%94-%ED%94%84%EB%A6%AC%EC%BD%94%EC%8A%A4-3%EC%A3%BC%EC%B0%A8-%ED%9A%8C%EA%B3%A0%EB%A1%9D
+[velog 회고록 링크](https://velog.io/@dfizae/%EC%9A%B0%ED%85%8C%EC%BD%94-%ED%94%84%EB%A6%AC%EC%BD%94%EC%8A%A4-3%EC%A3%BC%EC%B0%A8-%ED%9A%8C%EA%B3%A0%EB%A1%9D)
 
 ## 📌 주요 기능
 
